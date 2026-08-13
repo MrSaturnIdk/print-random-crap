@@ -1,5 +1,5 @@
 # Print Random Crap
-Inifinitely print random letters.
+Infinitely print random letters.
 ## Install
 1. `git clone` and `cd`.
 2. Configure with CMake.
