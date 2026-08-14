@@ -51,9 +51,9 @@ int main(int argc, char* argv[]) {
                 return 0;
             case 2:
                 std::printf("%s\n\n%s\n%s\n",
-                    "Print Random Crap 1.0.0",
-                    "Copyright © 2026 MrSaturnIdk",
-                    "Licensed under the AGPL-3.0-or-later"
+                    "Print Random Crap 1.1.0",
+                    "Copyright © 2026 MrSaturnIdk.",
+                    "Licensed under the AGPL-3.0-or-later."
                 );
                 return 0;
             default:
