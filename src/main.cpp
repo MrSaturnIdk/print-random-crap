@@ -50,10 +50,11 @@ int main(int argc, char* argv[]) {
                 );
                 return 0;
             case 2:
-                std::printf("%s\n\n%s\n%s\n",
-                    "Print Random Crap 1.1.0",
+                std::printf("%s\n\n%s\n%s\n\n%s\n",
+                    "Print Random Crap 1.1.1",
                     "Copyright © 2026 MrSaturnIdk.",
-                    "Licensed under the AGPL-3.0-or-later."
+                    "Licensed under the AGPL-3.0-or-later.",
+                    "Source code hosted at <https://github.com/MrSaturnIdk/print-random-crap>."
                 );
                 return 0;
             default:
