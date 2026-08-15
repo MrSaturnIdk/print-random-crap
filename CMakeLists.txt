@@ -19,6 +19,11 @@ endif()
 
 add_executable(printrandomcrap src/main.cpp)
 
+target_compile_definitions(printrandomcrap PRIVATE
+    HOMEPAGE="${PROJECT_HOMEPAGE_URL}"
+    PROJECT_VER="${PROJECT_VERSION}"
+)
+
 install(TARGETS printrandomcrap
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )

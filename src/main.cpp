@@ -66,11 +66,14 @@ int main(int argc, char* argv[]) {
                 );
                 return 0;
             case 2:
-                std::printf("%s\n\n%s\n%s\n\n%s\n",
-                    "Print Random Crap 1.2.0",
+                std::printf("%s%s\n\n%s\n%s\n\n%s%s%s\n",
+                    "Print Random Crap ",
+                    PROJECT_VER,
                     "Copyright © 2026 MrSaturnIdk.",
                     "Licensed under the AGPL-3.0-or-later.",
-                    "Source code hosted at <https://github.com/MrSaturnIdk/print-random-crap>."
+                    "Source code hosted at <",
+                    HOMEPAGE,
+                    ">."
                 );
                 return 0;
             default:
