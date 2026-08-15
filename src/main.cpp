@@ -8,6 +8,8 @@
 #include <string>
 #include <unordered_map>
 
+static bool noWhitespace {};
+
 int getRandomInt(int min, int max) {
     static std::random_device rd {};
     static std::mt19937 gen {rd()};
@@ -15,7 +17,7 @@ int getRandomInt(int min, int max) {
     std::uniform_int_distribution<> dist {min, max};
     return dist(gen);
 }
-char getRandomAsciiChar(bool noWhitespace) {
+char getRandomAsciiChar() {
     int character {};
     if (noWhitespace) {
         character = getRandomInt(33, 126);
@@ -77,20 +79,37 @@ int main(int argc, char* argv[]) {
                 );
                 return 0;
             default:
-                std::printf("%s%s%s\n%s%s%s\n",
-                    "Unrecognized flag \"",
-                    argv[i],
-                    "\".",
-                    "See \"",
-                    argv[0],
-                    " --help\" for details."
-                );
-                return -1;
+                if (expectingSeed) {
+                    std::uint32_t seed {};
+                    std::string string {argv[i]};
+                    if (!isCStringValidUnsignedInt(string.c_str())) {
+                        int j {};
+                        while (argv[i][j] != '\0') {
+                            string += argv[i][j];
+                            ++j;
+                        }
+                    }
+                    seed = cStringToInt(string.c_str());
+                    randomSeed = seed;
+                    usingCustomSeed = true;
+                    expectingSeed = false;
+                    break;
+                } else {
+                    std::printf("%s%s%s\n%s%s%s\n",
+                        "Unrecognized flag \"",
+                        argv[i],
+                        "\".",
+                        "See \"",
+                        argv[0],
+                        " --help\" for details."
+                    );
+                    return -1;
+                }
         }
     }
 
     for (;;) {
-        std::printf("%c", getRandomAsciiChar(noWhitespace));
+        std::printf("%c", getRandomAsciiChar());
         std::fflush(stdout);
     }
 }
