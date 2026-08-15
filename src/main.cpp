@@ -4,9 +4,9 @@
  */
 
 #include <cstdio>
-#include <map>
 #include <random>
 #include <string>
+#include <unordered_map>
 
 int getRandomInt(int min, int max) {
     static std::random_device rd {};
@@ -35,7 +35,7 @@ char getRandomAsciiChar(bool noWhitespace) {
 
 int main(int argc, char* argv[]) {
     bool noWhitespace {};
-    std::map<std::string, int> correlatedNumbers {
+    std::unordered_map<std::string, int> correlatedNumbers {
         /// Printing modifiers
         {"--no-whitespace", 3},
         /// Misc
