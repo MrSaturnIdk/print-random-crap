@@ -15,8 +15,14 @@ int getRandomInt(int min, int max) {
     std::uniform_int_distribution<> dist {min, max};
     return dist(gen);
 }
-char getRandomAsciiChar() {
-    int character {getRandomInt(30, 126)};
+char getRandomAsciiChar(bool noWhitespace) {
+    int character {};
+    if (noWhitespace) {
+        character = getRandomInt(33, 126);
+    } else {
+        character = getRandomInt(30, 126);
+    }
+
     switch (character) {
         case 30:
             return '\n';
@@ -28,7 +34,10 @@ char getRandomAsciiChar() {
 }
 
 int main(int argc, char* argv[]) {
+    bool noWhitespace {};
     std::map<std::string, int> correlatedNumbers {
+        /// Printing modifiers
+        {"--no-whitespace", 3},
         /// Misc
         {"--help", 1},
         {"--version", 2}
@@ -36,17 +45,24 @@ int main(int argc, char* argv[]) {
     for (int i = 1; i < argc; i++) {
         int num {correlatedNumbers[argv[i]]};
         switch (num) {
+            /// Same order as in correlatedNumbers
+            case 3:
+                noWhitespace = true;
+                break;
+
             case 1:
-                std::printf("%s%s%s\n%s\n%s\n\n%s\n%s\n%s\n%s\n",
+                std::printf("%s%s%s\n%s\n%s\n\n%s\n%s\n%s\n%s\n%s\n%s\n",
                     "Usage: ",
                     argv[0],
                     " [arguments]",
                     "Infinitely print random letters.",
                     "No arguments will print letters.",
                     "List of arguments:",
+                    "Modifies printing",
+                    "  --no-whitespace  Does not print spaces, newlines or tabs.",
                     "Miscellaneous",
-                    "  --help        Prints this screen.",
-                    "  --version     Prints version."
+                    "  --help           Prints this screen.",
+                    "  --version        Prints version."
                 );
                 return 0;
             case 2:
@@ -71,7 +87,7 @@ int main(int argc, char* argv[]) {
     }
 
     for (;;) {
-        std::printf("%c", getRandomAsciiChar());
+        std::printf("%c", getRandomAsciiChar(noWhitespace));
         std::fflush(stdout);
     }
 }
