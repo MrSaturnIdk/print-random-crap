@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 project(printrandomcrap
-    VERSION 1.2.1
+    VERSION 1.3.0
     DESCRIPTION "Infinitely print random letters"
     HOMEPAGE_URL "https://github.com/MrSaturnIdk/print-random-crap"
     LANGUAGES CXX
