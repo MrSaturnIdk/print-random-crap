@@ -142,11 +142,11 @@ int main(int argc, char* argv[]) {
                     std::uint32_t seed {};
                     std::string string {argv[i]};
                     if (!isCStringValidUnsignedInt(string.c_str())) {
-                        int j {};
-                        while (argv[i][j] != '\0') {
-                            string += argv[i][j];
-                            ++j;
+                        std::string tempString {};
+                        for (char c : string) {
+                            tempString += c;
                         }
+                        string = tempString;
                     }
                     seed = cStringToInt(string.c_str());
                     randomSeed = seed;
