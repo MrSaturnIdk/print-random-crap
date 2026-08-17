@@ -17,6 +17,11 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "CMake build type (what do you think)")
 endif()
 
+find_program(CACHE_PROGRAM ccache)
+if(CACHE_PROGRAM)
+    set(CMAKE_CXX_COMPILER_LAUNCHER "${CACHE_PROGRAM}")
+endif()
+
 add_executable(printrandomcrap src/main.cpp)
 
 target_compile_definitions(printrandomcrap PRIVATE
