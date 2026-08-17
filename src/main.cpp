@@ -4,6 +4,7 @@
  */
 
 #include <cmath>
+#include <cstddef>
 #include <cstdint>
 #include <cstdio>
 #include <random>
@@ -46,11 +47,10 @@ char getRandomAsciiChar() {
     }
 }
 
-bool isCStringValidUnsignedInt(const char* string) {
-    int i {};
-    while (string[i] != '\0') {
+bool isStdStringValidUnsignedInt(std::string string) {
+    for (char c : string) {
         // Characters 0-9 use 48-57 in ASCII, so getting the static_casted to int version minus 48 will get you 0-9
-        switch (static_cast<int> (string[i] - 48)) {
+        switch (static_cast<int> (c - 48)) {
             case 1:
                 break;
             case 2:
@@ -72,19 +72,16 @@ bool isCStringValidUnsignedInt(const char* string) {
             default:
                 return false;
         }
-        ++i;
     }
     return true;
 }
-std::uint32_t cStringToInt(const char* string) {
-    int i {};
+std::uint32_t stdStringToInt(std::string string) {
     std::uint32_t returnable {};
-    while (string[i] != '\0') {
+    for (std::size_t i {}; i < string.length(); ++i) {
         int number {string[i] - 48};
         double placeValue {std::pow(10.0, i)};
         number *= placeValue;
         returnable += number;
-        ++i;
     }
     return returnable;
 }
@@ -141,14 +138,14 @@ int main(int argc, char* argv[]) {
                 if (expectingSeed) {
                     std::uint32_t seed {};
                     std::string string {argv[i]};
-                    if (!isCStringValidUnsignedInt(string.c_str())) {
+                    if (!isStdStringValidUnsignedInt(string)) {
                         std::string tempString {};
                         for (char c : string) {
                             tempString += c;
                         }
                         string = tempString;
                     }
-                    seed = cStringToInt(string.c_str());
+                    seed = stdStringToInt(string);
                     randomSeed = seed;
                     usingCustomSeed = true;
                     expectingSeed = false;
