@@ -100,14 +100,16 @@ int main(int argc, char* argv[]) {
         int lookup {flagLookupTable[argv[i]]};
         switch (lookup) {
             /// Same order as in flagLookupTable
-            case 3:
+            case 3: {
                 noWhitespace = true;
                 break;
-            case 4:
+            }
+            case 4: {
                 expectingSeed = true;
                 break;
+            }
 
-            case 1:
+            case 1: {
                 std::printf("%s%s%s",
                     "Usage: ", argv[0], " [arguments]\n"
                     "Infinitely print random letters.\n"
@@ -121,7 +123,8 @@ int main(int argc, char* argv[]) {
                     "  --version          Prints version.\n"
                 );
                 return 0;
-            case 2:
+            }
+            case 2: {
                 std::printf("%s%s%s%s%s",
                     "Print Random Crap ", PROJECT_VER, "\n\n"
                     "Copyright © 2026 MrSaturnIdk.\n"
@@ -129,7 +132,8 @@ int main(int argc, char* argv[]) {
                     "Source code hosted at <", HOMEPAGE, ">.\n"
                 );
                 return 0;
-            default:
+            }
+            default: {
                 if (expectingSeed) {
                     std::uint32_t seed {};
                     std::string string {argv[i]};
@@ -152,6 +156,7 @@ int main(int argc, char* argv[]) {
                     );
                     return -1;
                 }
+            }
         }
     }
 
