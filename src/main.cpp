@@ -108,30 +108,25 @@ int main(int argc, char* argv[]) {
                 break;
 
             case 1:
-                std::printf("%s%s%s\n%s\n%s\n\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
-                    "Usage: ",
-                    argv[0],
-                    " [arguments]",
-                    "Infinitely print random letters.",
-                    "No arguments will print letters.",
-                    "List of arguments:",
-                    "Modifies printing",
-                    "  --set-seed <seed>  Set random seed to <seed>.",
-                    "  --no-whitespace    Does not print spaces, newlines or tabs.",
-                    "Miscellaneous",
-                    "  --help             Prints this screen.",
-                    "  --version          Prints version."
+                std::printf("%s%s%s",
+                    "Usage: ", argv[0], " [arguments]\n"
+                    "Infinitely print random letters.\n"
+                    "No arguments will print letters.\n\n"
+                    "List of arguments:\n"
+                    "Modifies printing\n"
+                    "  --set-seed <seed>  Set random seed to <seed>.\n"
+                    "  --no-whitespace    Does not print spaces, newlines or tabs.\n"
+                    "Miscellaneous\n"
+                    "  --help             Prints this screen.\n"
+                    "  --version          Prints version.\n"
                 );
                 return 0;
             case 2:
-                std::printf("%s%s\n\n%s\n%s\n\n%s%s%s\n",
-                    "Print Random Crap ",
-                    PROJECT_VER,
-                    "Copyright © 2026 MrSaturnIdk.",
-                    "Licensed under the AGPL-3.0-or-later.",
-                    "Source code hosted at <",
-                    HOMEPAGE,
-                    ">."
+                std::printf("%s%s%s%s%s",
+                    "Print Random Crap ", PROJECT_VER, "\n\n"
+                    "Copyright © 2026 MrSaturnIdk.\n"
+                    "Licensed under the AGPL-3.0-or-later.\n\n"
+                    "Source code hosted at <", HOMEPAGE, ">.\n"
                 );
                 return 0;
             default:
@@ -151,13 +146,9 @@ int main(int argc, char* argv[]) {
                     expectingSeed = false;
                     break;
                 } else {
-                    std::printf("%s%s%s\n%s%s%s\n",
-                        "Unrecognized flag \"",
-                        argv[i],
-                        "\".",
-                        "See \"",
-                        argv[0],
-                        " --help\" for details."
+                    std::printf("%s%s%s%s%s",
+                        "Unrecognized flag \"", argv[i], "\".\n"
+                        "See \"", argv[0], " --help\" for details.\n"
                     );
                     return -1;
                 }
