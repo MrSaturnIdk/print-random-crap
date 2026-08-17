@@ -99,7 +99,7 @@ int main(int argc, char* argv[]) {
         {"--help", 1},
         {"--version", 2}
     };
-    for (int i = 1; i < argc; ++i) {
+    for (int i {1}; i < argc; ++i) {
         int num {correlatedNumbers[argv[i]]};
         switch (num) {
             /// Same order as in correlatedNumbers
