@@ -87,7 +87,7 @@ std::uint32_t stdStringToInt(std::string string) {
 }
 
 int main(int argc, char* argv[]) {
-    bool expectingSeed {};
+    std::string expectedFlagParameter {};
     std::unordered_map<std::string, int> flagLookupTable {
         /// Printing modifiers
         {"--no-whitespace", 3},
@@ -95,6 +95,9 @@ int main(int argc, char* argv[]) {
         /// Misc
         {"--help", 1},
         {"--version", 2}
+    };
+    std::unordered_map<std::string, int> flagParameterLookupTable {
+        {"randomSeed", 1}
     };
     for (int i {1}; i < argc; ++i) {
         int lookup {flagLookupTable[argv[i]]};
@@ -105,7 +108,7 @@ int main(int argc, char* argv[]) {
                 break;
             }
             case 4: {
-                expectingSeed = true;
+                expectedFlagParameter = "randomSeed";
                 break;
             }
 
@@ -134,28 +137,34 @@ int main(int argc, char* argv[]) {
                 return 0;
             }
             default: {
-                if (expectingSeed) {
-                    std::uint32_t seed {};
-                    std::string string {argv[i]};
-                    if (!isStdStringValidUnsignedInt(string)) {
-                        std::string tempString {};
-                        for (char c : string) {
-                            tempString += c;
+                int lookup {flagParameterLookupTable[expectedFlagParameter]};
+                switch (lookup) {
+                    /// In the same order as flagParameterLookupTable, similar to flagLookupTable
+                    case 1: {
+                        std::uint32_t seed {};
+                        std::string string {argv[i]};
+                        if (!isStdStringValidUnsignedInt(string)) {
+                            std::string tempString {};
+                            for (char c : string) {
+                                tempString += c;
+                            }
+                            string = tempString;
                         }
-                        string = tempString;
+                        seed = stdStringToInt(string);
+                        randomSeed = seed;
+                        usingCustomSeed = true;
+                        expectedFlagParameter = "";
+                        break;
                     }
-                    seed = stdStringToInt(string);
-                    randomSeed = seed;
-                    usingCustomSeed = true;
-                    expectingSeed = false;
-                    break;
-                } else {
-                    std::printf("%s%s%s%s%s",
-                        "Unrecognized flag \"", argv[i], "\".\n"
-                        "See \"", argv[0], " --help\" for details.\n"
-                    );
-                    return -1;
+                    default: {
+                        std::printf("%s%s%s%s%s",
+                            "Unrecognized flag \"", argv[i], "\".\n"
+                            "See \"", argv[0], " --help\" for details.\n"
+                        );
+                        return -1;
+                    }
                 }
+                break;
             }
         }
     }
