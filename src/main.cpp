@@ -88,7 +88,7 @@ std::uint32_t stdStringToInt(std::string string) {
 
 int main(int argc, char* argv[]) {
     bool expectingSeed {};
-    std::unordered_map<std::string, int> correlatedNumbers {
+    std::unordered_map<std::string, int> flagLookupTable {
         /// Printing modifiers
         {"--no-whitespace", 3},
         {"--set-seed", 4},
@@ -97,9 +97,9 @@ int main(int argc, char* argv[]) {
         {"--version", 2}
     };
     for (int i {1}; i < argc; ++i) {
-        int num {correlatedNumbers[argv[i]]};
-        switch (num) {
-            /// Same order as in correlatedNumbers
+        int lookup {flagLookupTable[argv[i]]};
+        switch (lookup) {
+            /// Same order as in flagLookupTable
             case 3:
                 noWhitespace = true;
                 break;
