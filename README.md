@@ -5,6 +5,10 @@ Infinitely print random letters.
 2. Configure with CMake.
 3. Build.
 4. Install (if you feel like it).
+## Usage
+You can run `printrandomcrap --help` for a small summary of all the useless arguments I added.
+
+Otherwise, just run it normally.
 ## License & Copyright
 Regardless of how stupid this project is, I **will** include this section.
 
