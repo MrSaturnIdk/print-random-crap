@@ -22,7 +22,13 @@ if(CACHE_PROGRAM)
     set(CMAKE_CXX_COMPILER_LAUNCHER "${CACHE_PROGRAM}")
 endif()
 
-add_executable(printrandomcrap src/main.cpp)
+add_executable(printrandomcrap
+    src/helpers/conversion.cpp
+    src/helpers/random.cpp
+    src/main.cpp
+)
+
+target_include_directories(printrandomcrap PRIVATE include)
 
 target_compile_definitions(printrandomcrap PRIVATE
     HOMEPAGE="${PROJECT_HOMEPAGE_URL}"

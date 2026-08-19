@@ -3,88 +3,13 @@
  * The code is self explanatory
  */
 
-#include <cmath>
-#include <cstddef>
+#include "helpers/conversion.hpp"
+#include "helpers/random.hpp"
+
 #include <cstdint>
 #include <cstdio>
-#include <random>
 #include <string>
 #include <unordered_map>
-
-static bool usingCustomSeed {};
-static bool noWhitespace {};
-static std::uint32_t randomSeed {};
-
-int getRandomInt(int min, int max) {
-    if (usingCustomSeed) {
-        static std::mt19937 gen {randomSeed};
-
-        std::uniform_int_distribution<> dist {min, max};
-        return dist(gen);
-    } else {
-        static std::random_device rd {};
-        static std::mt19937 gen {rd()};
-
-        std::uniform_int_distribution<> dist {min, max};
-        return dist(gen);
-    }
-}
-char getRandomAsciiChar() {
-    int character {};
-    if (noWhitespace) {
-        character = getRandomInt(33, 126);
-    } else {
-        character = getRandomInt(30, 126);
-    }
-
-    switch (character) {
-        case 30:
-            return '\n';
-        case 31:
-            return '\t';
-        default:
-            return static_cast<char> (character);
-    }
-}
-
-bool isStdStringValidUnsignedInt(std::string string) {
-    for (char c : string) {
-        // Characters 0-9 use 48-57 in ASCII, so getting the static_casted to int version minus 48 will get you 0-9
-        switch (static_cast<int> (c - 48)) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-                break;
-            default:
-                return false;
-        }
-    }
-    return true;
-}
-std::uint32_t stdStringToInt(std::string string) {
-    std::uint32_t returnable {};
-    for (std::size_t i {}; i < string.length(); ++i) {
-        int number {string[i] - 48};
-        double placeValue {std::pow(10.0, i)};
-        number *= placeValue;
-        returnable += number;
-    }
-    return returnable;
-}
 
 /// -1 = Bad input
 int main(int argc, char* argv[]) {
@@ -109,7 +34,7 @@ int main(int argc, char* argv[]) {
                 break;
             }
             case 2: {
-                noWhitespace = true;
+                helpers::random::noWhitespace = true;
                 break;
             }
 
@@ -144,16 +69,16 @@ int main(int argc, char* argv[]) {
                     case 1: {
                         std::uint32_t seed {};
                         std::string string {argv[i]};
-                        if (!isStdStringValidUnsignedInt(string)) {
+                        if (!helpers::conversion::isStdStringValidUnsignedInt(string)) {
                             std::string tempString {};
                             for (char c : string) {
                                 tempString += c;
                             }
                             string = tempString;
                         }
-                        seed = stdStringToInt(string);
-                        randomSeed = seed;
-                        usingCustomSeed = true;
+                        seed = helpers::conversion::stdStringToInt(string);
+                        helpers::random::randomSeed = seed;
+                        helpers::random::usingCustomSeed = true;
                         expectedFlagParameter = "";
                         break;
                     }
@@ -176,7 +101,7 @@ int main(int argc, char* argv[]) {
     }
 
     for (;;) {
-        std::printf("%c", getRandomAsciiChar());
+        std::printf("%c", helpers::random::getRandomAsciiChar());
         std::fflush(stdout);
     }
 }
