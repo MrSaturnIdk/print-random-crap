@@ -169,6 +169,11 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    if (expectedFlagParameter != "") {
+        std::printf("ERROR: Parameter for argument \"%s\" not given.\n", argv[argc - 1]);
+        return -1;
+    }
+
     for (;;) {
         std::printf("%c", getRandomAsciiChar());
         std::fflush(stdout);
