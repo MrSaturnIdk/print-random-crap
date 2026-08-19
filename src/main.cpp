@@ -1,8 +1,6 @@
 /**
  * Floods the terminal with characters
  * The code is self explanatory
- *
- * -1 = Bad input
  */
 
 #include <cmath>
@@ -88,6 +86,7 @@ std::uint32_t stdStringToInt(std::string string) {
     return returnable;
 }
 
+/// -1 = Bad input
 int main(int argc, char* argv[]) {
     std::string expectedFlagParameter {};
     std::unordered_map<std::string, int> flagLookupTable {
