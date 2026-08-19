@@ -12,6 +12,7 @@ namespace helpers::random {
 bool usingCustomSeed {};
 std::uint32_t randomSeed {};
 bool noWhitespace {};
+bool onlyWhitespace {};
 
 int getRandomInt(int min, int max) {
     if (usingCustomSeed) {
@@ -31,6 +32,8 @@ char getRandomAsciiChar() {
     int character {};
     if (noWhitespace) {
         character = getRandomInt(33, 126);
+    } else if (onlyWhitespace) {
+        character = 30;
     } else {
         character = getRandomInt(30, 126);
     }

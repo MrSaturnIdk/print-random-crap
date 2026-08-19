@@ -18,9 +18,10 @@ int main(int argc, char* argv[]) {
         /// Printing modifiers
         {"--set-seed", 1},
         {"--no-whitespace", 2},
+        {"--only-whitespace", 3},
         /// Misc
-        {"--help", 3},
-        {"--version", 4}
+        {"--help", 4},
+        {"--version", 5}
     };
     std::unordered_map<std::string, int> flagParameterLookupTable {
         {"randomSeed", 1}
@@ -34,11 +35,21 @@ int main(int argc, char* argv[]) {
                 break;
             }
             case 2: {
+                if (helpers::random::onlyWhitespace) {
+                    helpers::random::onlyWhitespace = false;
+                }
                 helpers::random::noWhitespace = true;
                 break;
             }
-
             case 3: {
+                if (helpers::random::noWhitespace) {
+                    helpers::random::noWhitespace = false;
+                }
+                helpers::random::onlyWhitespace = true;
+                break;
+            }
+
+            case 4: {
                 std::printf("%s%s%s",
                     "Usage: ", argv[0], " [arguments]\n"
                     "Infinitely print random letters.\n"
@@ -47,13 +58,14 @@ int main(int argc, char* argv[]) {
                     "Modifies printing\n"
                     "  --set-seed <seed>  Set random seed to <seed>.\n"
                     "  --no-whitespace    Does not print spaces, newlines or tabs.\n"
+                    "  --only-whitespace  Only prints newlines.\n"
                     "Miscellaneous\n"
                     "  --help             Prints this screen.\n"
                     "  --version          Prints version.\n"
                 );
                 return 0;
             }
-            case 4: {
+            case 5: {
                 std::printf("%s",
                     "Print Random Crap " PROJECT_VER "\n\n"
                     "Copyright © 2026 MrSaturnIdk.\n"
