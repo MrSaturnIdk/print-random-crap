@@ -92,11 +92,11 @@ int main(int argc, char* argv[]) {
     std::string expectedFlagParameter {};
     std::unordered_map<std::string, int> flagLookupTable {
         /// Printing modifiers
-        {"--no-whitespace", 3},
-        {"--set-seed", 4},
+        {"--set-seed", 1},
+        {"--no-whitespace", 2},
         /// Misc
-        {"--help", 1},
-        {"--version", 2}
+        {"--help", 3},
+        {"--version", 4}
     };
     std::unordered_map<std::string, int> flagParameterLookupTable {
         {"randomSeed", 1}
@@ -105,16 +105,16 @@ int main(int argc, char* argv[]) {
         int lookup {flagLookupTable[argv[i]]};
         switch (lookup) {
             /// Same order as in flagLookupTable
-            case 3: {
-                noWhitespace = true;
-                break;
-            }
-            case 4: {
+            case 1: {
                 expectedFlagParameter = "randomSeed";
                 break;
             }
+            case 2: {
+                noWhitespace = true;
+                break;
+            }
 
-            case 1: {
+            case 3: {
                 std::printf("%s%s%s",
                     "Usage: ", argv[0], " [arguments]\n"
                     "Infinitely print random letters.\n"
@@ -129,7 +129,7 @@ int main(int argc, char* argv[]) {
                 );
                 return 0;
             }
-            case 2: {
+            case 4: {
                 std::printf("%s",
                     "Print Random Crap " PROJECT_VER "\n\n"
                     "Copyright © 2026 MrSaturnIdk.\n"
