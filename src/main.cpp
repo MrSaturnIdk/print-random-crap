@@ -158,7 +158,7 @@ int main(int argc, char* argv[]) {
                     }
                     default: {
                         std::printf("%s%s%s%s%s",
-                            "Unrecognized flag \"", argv[i], "\".\n"
+                            "ERROR: Unrecognized flag \"", argv[i], "\".\n"
                             "See \"", argv[0], " --help\" for details.\n"
                         );
                         return -1;
