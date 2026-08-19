@@ -128,11 +128,11 @@ int main(int argc, char* argv[]) {
                 return 0;
             }
             case 2: {
-                std::printf("%s%s%s%s%s",
-                    "Print Random Crap ", PROJECT_VER, "\n\n"
+                std::printf("%s",
+                    "Print Random Crap " PROJECT_VER "\n\n"
                     "Copyright © 2026 MrSaturnIdk.\n"
                     "Licensed under the AGPL-3.0-or-later.\n\n"
-                    "Source code hosted at <", HOMEPAGE, ">.\n"
+                    "Source code hosted at <" HOMEPAGE ">.\n"
                 );
                 return 0;
             }
