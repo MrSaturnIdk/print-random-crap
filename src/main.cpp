@@ -1,6 +1,8 @@
 /**
  * Floods the terminal with characters
  * The code is self explanatory
+ *
+ * -1 = Bad input
  */
 
 #include <cmath>
