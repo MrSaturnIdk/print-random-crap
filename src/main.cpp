@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
                         break;
                     }
                     default: {
-                        std::printf("%s%s%s%s%s",
+                        std::fprintf(stderr, "%s%s%s%s%s",
                             "ERROR: Unrecognized flag \"", argv[i], "\".\n"
                             "See \"", argv[0], " --help\" for details.\n"
                         );
@@ -96,7 +96,7 @@ int main(int argc, char* argv[]) {
     }
 
     if (expectedFlagParameter != "") {
-        std::printf("ERROR: Parameter for argument \"%s\" not given.\n", argv[argc - 1]);
+        std::fprintf(stderr, "ERROR: Parameter for argument \"%s\" not given.\n", argv[argc - 1]);
         return -1;
     }
 
