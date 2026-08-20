@@ -11,7 +11,7 @@
 
 namespace helpers::conversion {
 
-bool isStdStringValidUnsignedInt(std::string string) {
+bool isStdStringValidUnsignedInt(const std::string& string) {
     for (char c : string) {
         switch (c) {
             case '1':
@@ -38,7 +38,7 @@ bool isStdStringValidUnsignedInt(std::string string) {
     }
     return true;
 }
-std::uint32_t stdStringToInt(std::string string) {
+std::uint32_t stdStringToInt(const std::string& string) {
     std::uint32_t returnable {};
     for (std::size_t i {}; i < string.length(); ++i) {
         int number {string[i] - 48};
