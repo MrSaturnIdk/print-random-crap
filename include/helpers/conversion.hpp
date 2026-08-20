@@ -10,8 +10,8 @@
 
 namespace helpers::conversion {
 
-bool isStdStringValidUnsignedInt(std::string string);
-std::uint32_t stdStringToInt(std::string string);
+bool isStdStringValidUnsignedInt(const std::string& string);
+std::uint32_t stdStringToInt(const std::string& string);
 
 }
 
