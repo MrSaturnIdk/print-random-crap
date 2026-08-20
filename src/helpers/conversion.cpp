@@ -50,5 +50,4 @@ std::uint32_t stdStringToInt(std::string string) {
     return returnable;
 }
 
-
 }
