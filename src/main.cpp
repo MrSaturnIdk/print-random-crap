@@ -96,7 +96,7 @@ int main(int argc, char* argv[]) {
                     }
                     default: {
                         std::fprintf(stderr, "%s%s%s%s%s",
-                            "ERROR: Unrecognized flag \"", argv[i], "\".\n"
+                            "\033[1;31mError:\033[0m Unrecognized flag \"", argv[i], "\".\n"
                             "See \"", argv[0], " --help\" for details.\n"
                         );
                         return -1;
@@ -108,7 +108,7 @@ int main(int argc, char* argv[]) {
     }
 
     if (expectedFlagParameter != "") {
-        std::fprintf(stderr, "ERROR: Parameter for argument \"%s\" not given.\n", argv[argc - 1]);
+        std::fprintf(stderr, "\033[1;31mError:\033[0m Parameter for argument \"%s\" not given.\n", argv[argc - 1]);
         return -1;
     }
 
