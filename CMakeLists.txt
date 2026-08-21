@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.14)
-
 project(PrintRandomCrap
     VERSION 1.4.1
     DESCRIPTION "Infinitely print random letters"
@@ -16,7 +15,6 @@ include(GNUInstallDirs)
 if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
     set(CMAKE_BUILD_TYPE Release CACHE STRING "CMake build type (what do you think)" FORCE)
 endif()
-
 find_program(CACHE_PROGRAM ccache)
 if(CACHE_PROGRAM)
     set(CMAKE_CXX_COMPILER_LAUNCHER "${CACHE_PROGRAM}")
@@ -27,9 +25,7 @@ add_executable(printrandomcrap
     src/helpers/random.cpp
     src/main.cpp
 )
-
 target_include_directories(printrandomcrap PRIVATE include)
-
 target_compile_definitions(printrandomcrap PRIVATE
     HOMEPAGE="${PROJECT_HOMEPAGE_URL}"
     PROJECT_VER="${PROJECT_VERSION}"
