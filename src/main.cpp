@@ -11,7 +11,7 @@
 #include <string>
 #include <unordered_map>
 
-/// -1 = Bad input
+/// 1 = Bad input
 int main(int argc, char* argv[]) {
     std::string expectedFlagParameter {};
     std::unordered_map<std::string, int> flagLookupTable {
@@ -99,7 +99,7 @@ int main(int argc, char* argv[]) {
                             "\033[1;31mError:\033[0m Unrecognized flag \"", argv[i], "\".\n"
                             "See \"", argv[0], " --help\" for details.\n"
                         );
-                        return -1;
+                        return 1;
                     }
                 }
                 break;
@@ -109,7 +109,7 @@ int main(int argc, char* argv[]) {
 
     if (expectedFlagParameter != "") {
         std::fprintf(stderr, "\033[1;31mError:\033[0m Parameter for argument \"%s\" not given.\n", argv[argc - 1]);
-        return -1;
+        return 1;
     }
 
     for (;;) {
