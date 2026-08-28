@@ -8,7 +8,7 @@ mkdir build
 cd build
 cmake ..
 cmake --build .
-cmake --install .
+sudo cmake --install .
 ```
 ## Usage
 You can run `printrandomcrap --help` for a small summary of all the useless arguments I added.
