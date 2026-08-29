@@ -1,5 +1,7 @@
 # Print Random Crap
 Infinitely print random letters.
+
+Also my introduction to **C++**.
 ## Install
 ```sh
 git clone https://github.com/MrSaturnIdk/print-random-crap.git
