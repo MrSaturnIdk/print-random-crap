@@ -6,6 +6,13 @@
 #include "helpers/conversion.hpp"
 #include "helpers/random.hpp"
 
+// I am not dealing with Windows quirks for ANSI color codes
+#ifdef _WIN32
+#   define isatty(x) false
+#else
+#   include <unistd.h>
+#endif
+
 #include <cstdint>
 #include <cstdio>
 #include <string>
@@ -78,7 +85,10 @@ int main(int argc, char* argv[]) {
                 }
                 default: {
                     std::fprintf(stderr, "%s%s%s%s%s",
-                        "\033[1;31mError:\033[0m Unrecognized flag \"", argv[i], "\".\n"
+                        isatty(STDERR_FILENO)
+                            ? "\033[1;31mError:\033[0m Unrecognized flag \""
+                            : "Error: Unrecognized flag \"",
+                        argv[i], "\".\n"
                         "See \"", argv[0], " --help\" for details.\n"
                     );
                     return 1;
@@ -108,7 +118,11 @@ int main(int argc, char* argv[]) {
         }
     }
     if (expectedFlagParameter != "") {
-        std::fprintf(stderr, "\033[1;31mError:\033[0m Parameter for argument \"%s\" not given.\n", argv[argc - 1]);
+        std::fprintf(stderr,
+            isatty(STDERR_FILENO)
+                ? "\033[1;31mError:\033[0m Parameter for argument \"%s\" not given.\n"
+                : "Error: Parameter for argument \"%s\" not given.\n",
+            argv[argc - 1]);
         return 1;
     }
 
