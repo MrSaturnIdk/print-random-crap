@@ -3,12 +3,12 @@ project(PrintRandomCrap
     VERSION 2.0.0
     DESCRIPTION "Infinitely print random letters"
     HOMEPAGE_URL "https://github.com/MrSaturnIdk/print-random-crap"
-    LANGUAGES CXX
+    LANGUAGES C
 )
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
 
 include(GNUInstallDirs)
 
@@ -18,9 +18,9 @@ endif()
 message(STATUS "CMAKE_BUILD_TYPE is set to: ${CMAKE_BUILD_TYPE}")
 
 add_executable(printrandomcrap
-    src/helpers/conversion.cpp
-    src/helpers/random.cpp
-    src/main.cpp
+    src/arrayhelp.c
+    src/main.c
+    src/random.c
 )
 target_include_directories(printrandomcrap PRIVATE include)
 target_compile_definitions(printrandomcrap PRIVATE
