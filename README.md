@@ -1,5 +1,7 @@
 # Print Random Crap
 Infinitely print random letters.
+
+A joke project.
 ## Install
 ```sh
 git clone https://github.com/MrSaturnIdk/print-random-crap.git
