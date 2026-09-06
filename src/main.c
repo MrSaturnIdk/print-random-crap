@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
             }
             case 3: {
                 printf("%s",
-                    "Print Random Crap " PROJECT_VER " (last maintained version)\n\n"
+                    "Print Random Crap " PROJECT_VER "\n\n"
                     "Copyright © 2026 MrSaturnIdk.\n"
                     "Licensed under the AGPL-3.0-or-later.\n\n"
                     "Source code hosted at <" HOMEPAGE ">.\n"
