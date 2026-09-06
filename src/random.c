@@ -21,7 +21,7 @@ static void randomInit(void) {
     FILE* urandom = fopen("/dev/urandom", "r");
     if (!urandom) {
         fprintf(stderr, "Failed to open /dev/urandom\n");
-        exit(2); /// I/O fail
+        exit(2);
     }
     fread(&randomState, 1, sizeof(randomState), urandom);
     fclose(urandom);

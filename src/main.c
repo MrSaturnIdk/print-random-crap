@@ -17,7 +17,10 @@
 #include <stdint.h>
 #include <stdio.h>
 
-/// 1 = Bad input
+/**
+ * 1 = Bad input
+ * 2 = I/O fail
+ */
 int main(int argc, char* argv[]) {
     const char* argumentLookupTable[] = {
         /// Printing modifiers
