@@ -18,7 +18,7 @@ static void randomInit(void) {
 #   ifdef _WIN32
     randomState = (uint32_t)time(NULL);
 #   else
-    FILE* urandom = fopen("/dev/urandom", "r");
+    FILE *urandom = fopen("/dev/urandom", "r");
     if (!urandom) {
         fprintf(stderr, "Failed to open /dev/urandom\n");
         exit(2);
