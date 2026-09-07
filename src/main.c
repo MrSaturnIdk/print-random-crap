@@ -3,6 +3,7 @@
  * The code is self explanatory
  */
 
+#include "ansicolors.h"
 #include "arrayhelp.h"
 #include "random.h"
 
@@ -20,6 +21,7 @@
 /**
  * 1 = Bad input
  * 2 = I/O fail
+ * 3 = Clock fail
  */
 int main(int argc, char *argv[]) {
     const char *argumentLookupTable[] = {
@@ -77,7 +79,7 @@ int main(int argc, char *argv[]) {
             default: {
                 fprintf(stderr, "%s%s%s%s%s",
                     isatty(STDERR_FILENO)
-                        ? "\033[1;31mError:\033[0m Unrecognized flag \""
+                        ? ANSI_BOLD ANSI_RED "Error:" ANSI_RESET " Unrecognized flag \""
                         : "Error: Unrecognized flag \"",
                     argv[i], "\".\n"
                     "See \"", argv[0], " --help\" for details.\n"

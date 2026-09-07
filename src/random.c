@@ -2,49 +2,56 @@
  * Helper functions for making random stuff (source)
  */
 
-#ifdef _WIN32
-#   include <time.h>
-#else
-#   include <stdio.h>
+#include "ansicolors.h"
+
+#ifndef _WIN32
+#   include <unistd.h>
 #endif
 
 #include <stddef.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-/// Internals
-static uint32_t randomState = 0;
-static void randomInit(void) {
-#   ifdef _WIN32
-    randomState = (uint32_t)time(NULL);
-#   else
+/// Internal
+static void initSeed(void) {
+#   ifndef _WIN32
+    // Attempt /dev/urandom read first on Unix
     FILE *urandom = fopen("/dev/urandom", "r");
-    if (!urandom) {
-        fprintf(stderr, "Failed to open /dev/urandom\n");
-        exit(2);
+    if (urandom) {
+        unsigned seed = 0;
+        fread(&seed, 1, sizeof(seed), urandom);
+        fclose(urandom);
+        srand(seed);
+        return;
     }
-    fread(&randomState, 1, sizeof(randomState), urandom);
-    fclose(urandom);
 #   endif
-}
-static void xorshift32(void) {
-    randomState ^= randomState << 13;
-    randomState ^= randomState >> 17;
-    randomState ^= randomState << 5;
+    time_t clock = time(NULL);
+    if (clock == (time_t)-1) {
+#       ifdef _WIN32
+        fprintf(stderr, "Error: Failed to get time\n");
+#       else
+        fprintf(stderr, isatty(STDERR_FILENO)
+            ? ANSI_BOLD ANSI_RED "Error:" ANSI_RESET " Failed to read /dev/urandom and get time\n"
+            : "Error: Failed to read /dev/urandom and get time\n"
+        );
+#       endif
+        exit(3);
+    }
+    srand((unsigned)clock);
 }
 
 /// For use
 int noWhitespace = 0;
 int onlyWhitespace = 0;
 int getRandomInt(int min, int max) {
-    static int notInit = 1;
-    if (notInit) {
-        randomInit();
-        notInit = 0;
+    static int needsInit = 1;
+    if (needsInit) {
+        initSeed();
+        needsInit = 0;
     }
-    xorshift32();
-    uint32_t range = (uint32_t)(max - min + 1);
-    return  min + (int)(randomState % range);
+    return rand() % (max - min + 1) + min;
 }
 char getRandomAsciiChar(void) {
     int character = 0;
