@@ -31,10 +31,13 @@ int main(int argc, char *argv[]) {
         /// Misc
         "--help",
         "--version",
-        NULL
     };
     for (int i = 1; i < argc; ++i) {
-        int lookup = findIndexOfStringFromNullArray(argumentLookupTable, argv[i]);
+        int lookup = findIndexOfString(
+            argumentLookupTable,
+            sizeof(argumentLookupTable) / sizeof(argumentLookupTable[0]),
+            argv[i]
+        );
         switch (lookup) {
             /// Same order as in argumentLookupTable
             case 0: {
