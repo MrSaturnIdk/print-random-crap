@@ -8,7 +8,7 @@
 #include <stddef.h>
 #include <string.h>
 
-int findIndexOfStringFromNullArray(const char *array[], const char *item) {
+int findIndexOfStringFromNullArray(const char *restrict array[], const char *restrict item) {
     for (int i = 0; array[i]; ++i) {
         if (!strcmp(array[i], item)) {
             return i;

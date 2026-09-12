@@ -3,6 +3,6 @@
 #ifndef ARRAYHELP_H
 #define ARRAYHELP_H
 
-int findIndexOfStringFromNullArray(const char* array[], const char* item);
+int findIndexOfStringFromNullArray(const char *restrict array[], const char *restrict item);
 
 #endif
