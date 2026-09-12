@@ -19,10 +19,13 @@ static void initSeed(void) {
 #   ifndef _WIN32
     // Attempt /dev/urandom read first on Unix
     FILE *urandom = fopen("/dev/urandom", "r");
+    unsigned seed = 0;
+    size_t count = 0;
     if (urandom) {
-        unsigned seed = 0;
-        fread(&seed, 1, sizeof(seed), urandom);
+        count = fread(&seed, 1, sizeof(seed), urandom);
         fclose(urandom);
+    }
+    if (count != 0) {
         srand(seed);
         return;
     }
