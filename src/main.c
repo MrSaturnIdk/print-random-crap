@@ -79,12 +79,11 @@ int main(int argc, char *argv[]) {
                 return 0;
             }
             default: {
-                fprintf(stderr, "%s%s%s%s%s",
-                    isatty(STDERR_FILENO)
-                        ? ANSI_BOLD ANSI_RED "Error:" ANSI_RESET " Unrecognized flag \""
-                        : "Error: Unrecognized flag \"",
-                    argv[i], "\".\n"
-                    "See \"", argv[0], " --help\" for details.\n"
+                fprintf(stderr, "%sError:%s Unrecognized flag \"%s\".\nSee \"%s --help\" for details\n",
+                    isatty(STDERR_FILENO) ? ANSI_BOLD ANSI_RED : "",
+                    isatty(STDERR_FILENO) ? ANSI_RESET : "",
+                    argv[i],
+                    argv[0]
                 );
                 return 1;
             }

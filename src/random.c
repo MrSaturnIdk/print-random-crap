@@ -35,9 +35,9 @@ static void initSeed(void) {
 #       ifdef _WIN32
         fprintf(stderr, "Error: Failed to get time\n");
 #       else
-        fprintf(stderr, isatty(STDERR_FILENO)
-            ? ANSI_BOLD ANSI_RED "Error:" ANSI_RESET " Failed to read /dev/urandom and get time\n"
-            : "Error: Failed to read /dev/urandom and get time\n"
+        fprintf(stderr,"%sError:%s Failed to read /dev/urandom and get time\n",
+            isatty(STDERR_FILENO) ? ANSI_BOLD ANSI_RED : "",
+            isatty(STDERR_FILENO) ? ANSI_RESET : ""
         );
 #       endif
         exit(3);
