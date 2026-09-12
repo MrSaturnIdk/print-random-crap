@@ -9,9 +9,9 @@
 #include <string.h>
 
 int findIndexOfStringFromNullArray(const char *restrict array[], const char *restrict item) {
-    for (int i = 0; array[i]; ++i) {
+    for (size_t i = 0; array[i]; ++i) {
         if (!strcmp(array[i], item)) {
-            return i;
+            return (int)i;
         }
     }
     return -1;
