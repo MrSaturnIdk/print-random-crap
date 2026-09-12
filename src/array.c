@@ -3,7 +3,7 @@
  * I don't wanna clog my main file
  */
 
-#include "arrayhelp.h"
+#include "array.h"
 
 #include <stddef.h>
 #include <string.h>

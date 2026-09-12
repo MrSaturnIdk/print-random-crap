@@ -4,7 +4,7 @@
  */
 
 #include "ansicolors.h"
-#include "arrayhelp.h"
+#include "array.h"
 #include "random.h"
 
 // I am not dealing with Windows quirks for ANSI color codes

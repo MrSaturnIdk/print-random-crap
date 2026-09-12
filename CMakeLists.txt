@@ -18,7 +18,7 @@ endif()
 message(STATUS "CMAKE_BUILD_TYPE is set to: ${CMAKE_BUILD_TYPE}")
 
 add_executable(printrandomcrap
-    src/arrayhelp.c
+    src/array.c
     src/main.c
     src/random.c
 )
