@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
                 return 0;
             }
             default: {
-                fprintf(stderr, "%sError:%s Unrecognized flag \"%s\".\nSee \"%s --help\" for details\n",
+                fprintf(stderr, "%sError:%s Unrecognized flag \"%s\"\nSee \"%s --help\" for details\n",
                     isatty(STDERR_FILENO) ? ANSI_BOLD ANSI_RED : "",
                     isatty(STDERR_FILENO) ? ANSI_RESET : "",
                     argv[i],
