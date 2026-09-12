@@ -20,8 +20,7 @@
 
 /**
  * 1 = Bad input
- * 2 = I/O fail
- * 3 = Clock fail
+ * 3 = Random seeding error
  */
 int main(int argc, char *argv[]) {
     const char *argumentLookupTable[] = {
