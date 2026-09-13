@@ -18,7 +18,11 @@ extern const char *PROGRAM_NAME;
 extern int STDERR_TTY;
 
 /// Internal
-static void initSeed(void) {
+/**
+ * 0 = Success
+ * 1 = Fail
+ */
+static int initSeed(void) {
 #   ifndef _WIN32
     // Attempt /dev/urandom read first on Unix
     FILE *urandom = fopen("/dev/urandom", "r");
@@ -30,7 +34,7 @@ static void initSeed(void) {
     }
     if (count != 0) {
         srand(seed);
-        return;
+        return 0;
     }
 #   endif
     time_t clock = time(NULL);
@@ -46,9 +50,10 @@ static void initSeed(void) {
             STDERR_TTY ? ANSI_RESET : ""
         );
 #       endif
-        exit(3);
+        return 1;
     }
     srand((unsigned)clock);
+    return 0;
 }
 
 /// For use
@@ -57,7 +62,10 @@ int onlyWhitespace = 0;
 int getRandomInt(int min, int max) {
     static int needsInit = 1;
     if (needsInit) {
-        initSeed();
+        int result = initSeed();
+        if (result) {
+            return -1;
+        }
         needsInit = 0;
     }
     return rand() % (max - min + 1) + min;
@@ -73,6 +81,9 @@ char getRandomAsciiChar(void) {
     }
 
     switch (character) {
+        case -1: {
+            return '\0';
+        }
         case 30: {
             return '\n';
         }

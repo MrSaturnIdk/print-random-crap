@@ -107,6 +107,11 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    // Check seed fail
+    if (getRandomAsciiChar() == '\0') {
+        return 3;
+    }
+
     // Actual loop
     for (;;) {
         printf("%c", getRandomAsciiChar());
