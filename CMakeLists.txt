@@ -12,6 +12,7 @@ set(CMAKE_C_EXTENSIONS OFF)
 
 include(GNUInstallDirs)
 
+message(STATUS "Project version is: ${PROJECT_VERSION}")
 if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
     set(CMAKE_BUILD_TYPE Release CACHE STRING "CMake build type (what do you think)" FORCE)
 endif()
