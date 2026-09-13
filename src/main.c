@@ -18,12 +18,16 @@
 #include <stdio.h>
 
 const char *PROGRAM_NAME = "";
+int STDERR_TTY = 0;
+
 /**
  * 1 = Bad input
  * 3 = Random seeding error
  */
 int main(int argc, char *argv[]) {
+    // Variables
     PROGRAM_NAME = argv[0];
+    STDERR_TTY = isatty(STDERR_FILENO);
     const char *argumentLookupTable[] = {
         /// Printing modifiers
         "--no-whitespace",
@@ -32,6 +36,8 @@ int main(int argc, char *argv[]) {
         "--help",
         "--version",
     };
+
+    // Read arguments
     for (int i = 1; i < argc; ++i) {
         int lookup = findIndexOfString(
             argumentLookupTable,
@@ -82,25 +88,26 @@ int main(int argc, char *argv[]) {
             default: {
                 fprintf(stderr, "%s: %serror:%s %sunrecognized argument '%s'%s\n",
                     PROGRAM_NAME,
-                    isatty(STDERR_FILENO) ? ANSI_BOLD ANSI_RED : "",
-                    isatty(STDERR_FILENO) ? ANSI_RESET : "",
-                    isatty(STDERR_FILENO) ? ANSI_BOLD : "",
+                    STDERR_TTY ? ANSI_BOLD ANSI_RED : "",
+                    STDERR_TTY ? ANSI_RESET : "",
+                    STDERR_TTY ? ANSI_BOLD : "",
                     argv[i],
-                    isatty(STDERR_FILENO) ? ANSI_RESET : ""
+                    STDERR_TTY ? ANSI_RESET : ""
                 );
                 fprintf(stderr, "%s: %snote:%s %ssee '%s --help' for details%s\n",
                     PROGRAM_NAME,
-                    isatty(STDERR_FILENO) ? ANSI_BOLD ANSI_GRAY : "",
-                    isatty(STDERR_FILENO) ? ANSI_RESET : "",
-                    isatty(STDERR_FILENO) ? ANSI_BOLD : "",
+                    STDERR_TTY ? ANSI_BOLD ANSI_GRAY : "",
+                    STDERR_TTY ? ANSI_RESET : "",
+                    STDERR_TTY ? ANSI_BOLD : "",
                     PROGRAM_NAME,
-                    isatty(STDERR_FILENO) ? ANSI_RESET : ""
+                    STDERR_TTY ? ANSI_RESET : ""
                 );
                 return 1;
             }
         }
     }
 
+    // Actual loop
     for (;;) {
         printf("%c", getRandomAsciiChar());
         fflush(stdout);

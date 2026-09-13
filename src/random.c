@@ -15,6 +15,8 @@
 #include <time.h>
 
 extern const char *PROGRAM_NAME;
+extern int STDERR_TTY;
+
 /// Internal
 static void initSeed(void) {
 #   ifndef _WIN32
@@ -38,10 +40,10 @@ static void initSeed(void) {
 #       else
         fprintf(stderr,"%s: %serror:%s %sfailed to read /dev/urandom and get time%s\n",
             PROGRAM_NAME,
-            isatty(STDERR_FILENO) ? ANSI_BOLD ANSI_RED : "",
-            isatty(STDERR_FILENO) ? ANSI_RESET : "",
-            isatty(STDERR_FILENO) ? ANSI_BOLD : "",
-            isatty(STDERR_FILENO) ? ANSI_RESET : ""
+            STDERR_TTY ? ANSI_BOLD ANSI_RED : "",
+            STDERR_TTY ? ANSI_RESET : "",
+            STDERR_TTY ? ANSI_BOLD : "",
+            STDERR_TTY ? ANSI_RESET : ""
         );
 #       endif
         exit(3);
