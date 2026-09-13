@@ -17,13 +17,13 @@
 #include <stdint.h>
 #include <stdio.h>
 
-const char *programName = "";
+const char *PROGRAM_NAME = "";
 /**
  * 1 = Bad input
  * 3 = Random seeding error
  */
 int main(int argc, char *argv[]) {
-    programName = argv[0];
+    PROGRAM_NAME = argv[0];
     const char *argumentLookupTable[] = {
         /// Printing modifiers
         "--no-whitespace",
@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 
             case 2: {
                 printf("%s%s%s",
-                    "Usage: ", programName, " [arguments]\n"
+                    "Usage: ", PROGRAM_NAME, " [arguments]\n"
                     "Infinitely print random letters.\n"
                     "No arguments will print letters.\n\n"
                     "List of arguments:\n"
@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
             }
             default: {
                 fprintf(stderr, "%s: %serror:%s %sunrecognized argument '%s'%s\n",
-                    programName,
+                    PROGRAM_NAME,
                     isatty(STDERR_FILENO) ? ANSI_BOLD ANSI_RED : "",
                     isatty(STDERR_FILENO) ? ANSI_RESET : "",
                     isatty(STDERR_FILENO) ? ANSI_BOLD : "",
@@ -89,11 +89,11 @@ int main(int argc, char *argv[]) {
                     isatty(STDERR_FILENO) ? ANSI_RESET : ""
                 );
                 fprintf(stderr, "%s: %snote:%s %ssee '%s --help' for details%s\n",
-                    programName,
+                    PROGRAM_NAME,
                     isatty(STDERR_FILENO) ? ANSI_BOLD ANSI_GRAY : "",
                     isatty(STDERR_FILENO) ? ANSI_RESET : "",
                     isatty(STDERR_FILENO) ? ANSI_BOLD : "",
-                    programName,
+                    PROGRAM_NAME,
                     isatty(STDERR_FILENO) ? ANSI_RESET : ""
                 );
                 return 1;

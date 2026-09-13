@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-extern const char *programName;
+extern const char *PROGRAM_NAME;
 /// Internal
 static void initSeed(void) {
 #   ifndef _WIN32
@@ -34,10 +34,10 @@ static void initSeed(void) {
     time_t clock = time(NULL);
     if (clock == (time_t)-1) {
 #       ifdef _WIN32
-        fprintf(stderr, "%s: error: failed to get time\n", programName);
+        fprintf(stderr, "%s: error: failed to get time\n", PROGRAM_NAME);
 #       else
         fprintf(stderr,"%s: %serror:%s %sfailed to read /dev/urandom and get time%s\n",
-            programName,
+            PROGRAM_NAME,
             isatty(STDERR_FILENO) ? ANSI_BOLD ANSI_RED : "",
             isatty(STDERR_FILENO) ? ANSI_RESET : "",
             isatty(STDERR_FILENO) ? ANSI_BOLD : "",
