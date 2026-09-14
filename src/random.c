@@ -2,6 +2,8 @@
  * Helper functions for making random stuff (source)
  */
 
+#include "random.h"
+
 #include "ansicolors.h"
 
 #ifndef _WIN32
