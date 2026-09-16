@@ -22,7 +22,7 @@ int STDERR_TTY = 0;
 
 /**
  * 1 = Bad input
- * 3 = Random seeding error
+ * 2 = Random seeding error
  */
 int main(int argc, char *argv[]) {
     // Variables
@@ -109,7 +109,7 @@ int main(int argc, char *argv[]) {
 
     // Check seed fail
     if (getRandomAsciiChar() == '\0') {
-        return 3;
+        return 2;
     }
 
     // Actual loop
