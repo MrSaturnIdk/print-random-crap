@@ -19,6 +19,6 @@ Otherwise, just run it normally.
 ## License & Copyright
 Regardless of how stupid this project is, I **will** include this section.
 
-Copyright © 2026 MrSaturnIdk.
+Copyright (c) 2026 MrSaturnIdk.
 
 Licensed under the [AGPL-3.0-or-later](LICENSE).
