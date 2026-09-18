@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-extern const char *PROGRAM_NAME;
+extern const char* PROGRAM_NAME;
 extern int STDERR_TTY;
 
 /// Internal
@@ -22,7 +22,7 @@ extern int STDERR_TTY;
 static int initSeed(void) {
 #   ifndef _WIN32
     // Attempt /dev/urandom read first on Unix
-    FILE *urandom = fopen("/dev/urandom", "r");
+    FILE* urandom = fopen("/dev/urandom", "r");
     unsigned seed = 0;
     size_t count = 0;
     if (urandom) {

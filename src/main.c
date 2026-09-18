@@ -16,18 +16,18 @@
 
 #include <stdio.h>
 
-const char *PROGRAM_NAME = "";
+const char* PROGRAM_NAME = "";
 int STDERR_TTY = 0;
 
 /**
  * 1 = Bad input
  * 2 = Random seeding error
  */
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     // Variables
     PROGRAM_NAME = argv[0];
     STDERR_TTY = isatty(STDERR_FILENO);
-    const char *argumentLookupTable[] = {
+    const char* argumentLookupTable[] = {
         /// Printing modifiers
         "--no-whitespace",
         "--only-whitespace",
