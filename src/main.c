@@ -14,7 +14,6 @@
 #   include <unistd.h>
 #endif
 
-#include <stdint.h>
 #include <stdio.h>
 
 const char *PROGRAM_NAME = "";

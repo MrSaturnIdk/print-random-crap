@@ -5,8 +5,6 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
-#include <stdint.h>
-
 extern int noWhitespace;
 extern int onlyWhitespace;
 

@@ -6,12 +6,7 @@
 
 #include "ansicolors.h"
 
-#ifndef _WIN32
-#   include <unistd.h>
-#endif
-
 #include <stddef.h>
-#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
