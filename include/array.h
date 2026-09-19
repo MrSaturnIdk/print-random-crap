@@ -1,7 +1,7 @@
 /// The header file for array helpers
 
-#ifndef ARRAYHELP_H
-#define ARRAYHELP_H
+#ifndef ARRAY_H
+#define ARRAY_H
 
 #include <stddef.h>
 
