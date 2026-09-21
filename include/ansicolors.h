@@ -1,4 +1,4 @@
-/// If you've ever used ANSI color codes, you'll know why I made this
+/// So I have clear names and not a wall of \033
 
 #ifndef ANSICOLORS_H
 #define ANSICOLORS_H
