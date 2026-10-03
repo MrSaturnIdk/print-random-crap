@@ -29,7 +29,7 @@ static int initSeed(void) {
         count = fread(&seed, 1, sizeof(seed), urandom);
         fclose(urandom);
     }
-    if (count != 0) {
+    if (count) {
         srand(seed);
         return 0;
     }

@@ -107,7 +107,7 @@ int main(int argc, char* argv[]) {
     }
 
     // Check seed fail
-    if (getRandomAsciiChar() == '\0') {
+    if (!getRandomAsciiChar()) {
         return 2;
     }
 
