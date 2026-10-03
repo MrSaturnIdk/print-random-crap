@@ -65,7 +65,9 @@ int getRandomInt(int min, int max) {
         }
         needsInit = 0;
     }
-    return rand() % (max - min + 1) + min;
+    int range = max - min + 1;
+    int random = rand() % range;
+    return random + min;
 }
 char getRandomAsciiChar(void) {
     int character = 0;
