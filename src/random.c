@@ -26,7 +26,7 @@ static int initSeed(void) {
     unsigned seed = 0;
     size_t count = 0;
     if (urandom) {
-        count = fread(&seed, 1, sizeof(seed), urandom);
+        count = fread(&seed, sizeof(seed), 1, urandom);
         fclose(urandom);
     }
     if (count) {
