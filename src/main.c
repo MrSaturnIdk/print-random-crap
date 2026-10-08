@@ -16,7 +16,6 @@
 
 #include <stdio.h>
 
-const char* PROGRAM_NAME = "";
 int STDERR_TTY = 0;
 
 /**
@@ -25,7 +24,6 @@ int STDERR_TTY = 0;
  */
 int main(int argc, char* argv[]) {
     // Variables
-    PROGRAM_NAME = argv[0];
     STDERR_TTY = isatty(STDERR_FILENO);
     const char* argumentLookupTable[] = {
         /// Printing modifiers
@@ -62,7 +60,7 @@ int main(int argc, char* argv[]) {
 
             case 2: {
                 printf("%s%s%s",
-                    "Usage: ", PROGRAM_NAME, " [arguments]\n"
+                    "Usage: ", argv[0], " [arguments]\n"
                     "Infinitely print random letters.\n"
                     "No arguments will print letters.\n\n"
                     "List of arguments:\n"
@@ -86,7 +84,7 @@ int main(int argc, char* argv[]) {
             }
             default: {
                 fprintf(stderr, "%s: %serror:%s %sunrecognized argument '%s'%s\n",
-                    PROGRAM_NAME,
+                    argv[0],
                     STDERR_TTY ? ANSI_BOLD ANSI_RED : "",
                     STDERR_TTY ? ANSI_RESET : "",
                     STDERR_TTY ? ANSI_BOLD : "",
@@ -94,11 +92,11 @@ int main(int argc, char* argv[]) {
                     STDERR_TTY ? ANSI_RESET : ""
                 );
                 fprintf(stderr, "%s: %snote:%s %ssee '%s --help' for details%s\n",
-                    PROGRAM_NAME,
+                    argv[0],
                     STDERR_TTY ? ANSI_BOLD ANSI_GRAY : "",
                     STDERR_TTY ? ANSI_RESET : "",
                     STDERR_TTY ? ANSI_BOLD : "",
-                    PROGRAM_NAME,
+                    argv[0],
                     STDERR_TTY ? ANSI_RESET : ""
                 );
                 return 1;
@@ -108,6 +106,17 @@ int main(int argc, char* argv[]) {
 
     // Check seed fail
     if (!getRandomAsciiChar()) {
+#       ifdef _WIN32
+        fprintf(stderr, "%s: error: failed to get time\n", argv[0]);
+#       else
+        fprintf(stderr,"%s: %serror:%s %sfailed to read /dev/urandom and get time%s\n",
+            argv[0],
+            STDERR_TTY ? ANSI_BOLD ANSI_RED : "",
+            STDERR_TTY ? ANSI_RESET : "",
+            STDERR_TTY ? ANSI_BOLD : "",
+            STDERR_TTY ? ANSI_RESET : ""
+        );
+#       endif
         return 2;
     }
 

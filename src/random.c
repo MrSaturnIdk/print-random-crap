@@ -11,10 +11,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-extern const char* PROGRAM_NAME;
-extern int STDERR_TTY;
-
-/// Internal
 /**
  * 0 = Success
  * 1 = Fail
@@ -36,17 +32,6 @@ static int initSeed(void) {
 #   endif
     time_t clock = time(NULL);
     if (clock == (time_t)-1) {
-#       ifdef _WIN32
-        fprintf(stderr, "%s: error: failed to get time\n", PROGRAM_NAME);
-#       else
-        fprintf(stderr,"%s: %serror:%s %sfailed to read /dev/urandom and get time%s\n",
-            PROGRAM_NAME,
-            STDERR_TTY ? ANSI_BOLD ANSI_RED : "",
-            STDERR_TTY ? ANSI_RESET : "",
-            STDERR_TTY ? ANSI_BOLD : "",
-            STDERR_TTY ? ANSI_RESET : ""
-        );
-#       endif
         return 1;
     }
     srand((unsigned)clock);
