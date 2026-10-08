@@ -74,11 +74,11 @@ int main(int argc, char* argv[]) {
                 return 0;
             }
             case 3: {
-                printf("%s",
+                puts(
                     "Print Random Crap " PROJECT_VER "\n\n"
                     "Copyright (c) 2026 MrSaturnIdk.\n"
                     "Licensed under the AGPL-3.0-or-later.\n\n"
-                    "Source code hosted at <" HOMEPAGE ">.\n"
+                    "Source code hosted at <" HOMEPAGE ">."
                 );
                 return 0;
             }
@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
 
     // Actual loop
     for (;;) {
-        printf("%c", getRandomAsciiChar());
+        putchar(getRandomAsciiChar());
         fflush(stdout);
     }
 }
