@@ -16,66 +16,66 @@
  * 1 = Fail
  */
 static int initSeed(void) {
-#   ifndef _WIN32
-    // Attempt /dev/urandom read first on Unix
-    FILE* urandom = fopen("/dev/urandom", "r");
-    unsigned seed = 0;
-    size_t count = 0;
-    if (urandom) {
-        count = fread(&seed, sizeof(seed), 1, urandom);
-        fclose(urandom);
-    }
-    if (count) {
-        srand(seed);
-        return 0;
-    }
-#   endif
-    time_t clock = time(NULL);
-    if (clock == (time_t)-1) {
-        return 1;
-    }
-    srand((unsigned)clock);
-    return 0;
+#	ifndef _WIN32
+	// Attempt /dev/urandom read first on Unix
+	FILE* urandom = fopen("/dev/urandom", "r");
+	unsigned seed = 0;
+	size_t count = 0;
+	if (urandom) {
+		count = fread(&seed, sizeof(seed), 1, urandom);
+		fclose(urandom);
+	}
+	if (count) {
+		srand(seed);
+		return 0;
+	}
+#	endif
+	time_t clock = time(NULL);
+	if (clock == (time_t)-1) {
+		return 1;
+	}
+	srand((unsigned)clock);
+	return 0;
 }
 
 /// For use
 int noWhitespace = 0;
 int onlyWhitespace = 0;
 int getRandomInt(int min, int max) {
-    static int needsInit = 1;
-    if (needsInit) {
-        int result = initSeed();
-        if (result) {
-            return -1;
-        }
-        needsInit = 0;
-    }
-    int range = max - min + 1;
-    int random = rand() % range;
-    return random + min;
+	static int needsInit = 1;
+	if (needsInit) {
+		int result = initSeed();
+		if (result) {
+			return -1;
+		}
+		needsInit = 0;
+	}
+	int range = max - min + 1;
+	int random = rand() % range;
+	return random + min;
 }
 char getRandomAsciiChar(void) {
-    int character = 0;
-    if (noWhitespace) {
-        character = getRandomInt(33, 126);
-    } else if (onlyWhitespace) {
-        character = 30;
-    } else {
-        character = getRandomInt(30, 126);
-    }
+	int character = 0;
+	if (noWhitespace) {
+		character = getRandomInt(33, 126);
+	} else if (onlyWhitespace) {
+		character = 30;
+	} else {
+		character = getRandomInt(30, 126);
+	}
 
-    switch (character) {
-        case -1: {
-            return '\0';
-        }
-        case 30: {
-            return '\n';
-        }
-        case 31: {
-            return '\t';
-        }
-        default: {
-            return (char)character;
-        }
-    }
+	switch (character) {
+		case -1: {
+			return '\0';
+		}
+		case 30: {
+			return '\n';
+		}
+		case 31: {
+			return '\t';
+		}
+		default: {
+			return (char)character;
+		}
+	}
 }
