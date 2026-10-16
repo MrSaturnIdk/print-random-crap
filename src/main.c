@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
 		"--only-whitespace",
 		/// Misc
 		"--help",
-		"--version",
+		"--version"
 	};
 
 	// Read arguments
