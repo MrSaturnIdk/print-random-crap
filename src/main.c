@@ -65,11 +65,11 @@ int main(int argc, char* argv[]) {
 					"No arguments will print letters.\n\n"
 					"List of arguments:\n"
 					"Modifies printing\n"
-					"  --no-whitespace	Does not print spaces, newlines or tabs.\n"
+					"  --no-whitespace    Does not print spaces, newlines or tabs.\n"
 					"  --only-whitespace  Only prints newlines.\n"
 					"Miscellaneous\n"
-					"  --help			 Prints this screen.\n"
-					"  --version		  Prints version.\n"
+					"  --help             Prints this screen.\n"
+					"  --version          Prints version.\n"
 				);
 				return 0;
 			}
