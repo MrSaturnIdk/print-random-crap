@@ -16,15 +16,13 @@
 
 #include <stdio.h>
 
-int STDERR_TTY = 0;
-
 /**
  * 1 = Bad input
  * 2 = Random seeding error
  */
 int main(int argc, char* argv[]) {
 	// Variables
-	STDERR_TTY = isatty(STDERR_FILENO);
+	int STDERR_TTY = isatty(STDERR_FILENO);
 	const char* argumentLookupTable[] = {
 		/// Printing modifiers
 		"--no-whitespace",
