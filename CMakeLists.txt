@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.12)
 project(PrintRandomCrap
-	VERSION 4.0.5
+	VERSION 4.1.0
 	DESCRIPTION "Infinitely print random letters"
 	HOMEPAGE_URL "https://github.com/MrSaturnIdk/print-random-crap"
 	LANGUAGES C
 )
 
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD 90)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 

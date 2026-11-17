@@ -1,13 +1,11 @@
-/**
- * Helper functions for making random stuff (source)
- */
+/** Helper functions for making random stuff (source) */
 
 #include "random.h"
 
-#include "ansicolors.h"
-
+#ifndef _WIN32
 #include <stddef.h>
 #include <stdio.h>
+#endif
 #include <stdlib.h>
 #include <time.h>
 
@@ -16,11 +14,14 @@
  * 1 = Fail
  */
 static int initSeed(void) {
+	time_t now = 0;
 #	ifndef _WIN32
-	// Attempt /dev/urandom read first on Unix
-	FILE* urandom = fopen("/dev/urandom", "r");
-	unsigned seed = 0;
+	/* Attempt /dev/urandom read first on Unix */
+	FILE* urandom = NULL;
 	size_t count = 0;
+	unsigned seed = 0;
+
+	urandom = fopen("/dev/urandom", "r");
 	if (urandom) {
 		count = fread(&seed, sizeof(seed), 1, urandom);
 		fclose(urandom);
@@ -30,19 +31,20 @@ static int initSeed(void) {
 		return 0;
 	}
 #	endif
-	time_t clock = time(NULL);
-	if (clock == (time_t)-1) {
+	now = time(NULL);
+	if (now == (time_t)-1) {
 		return 1;
 	}
-	srand((unsigned)clock);
+	srand((unsigned)now);
 	return 0;
 }
 
-/// For use
-int noWhitespace = 0;
-int onlyWhitespace = 0;
+/** For use */
 int getRandomInt(int min, int max) {
 	static int needsInit = 1;
+	int range = 0;
+	int random = 0;
+
 	if (needsInit) {
 		int result = initSeed();
 		if (result) {
@@ -50,18 +52,26 @@ int getRandomInt(int min, int max) {
 		}
 		needsInit = 0;
 	}
-	int range = max - min + 1;
-	int random = rand() % range;
+
+	range = max - min + 1;
+	random = rand() % range;
 	return random + min;
 }
-char getRandomAsciiChar(void) {
+char getRandomAsciiChar(int whitespace) {
 	int character = 0;
-	if (noWhitespace) {
-		character = getRandomInt(33, 126);
-	} else if (onlyWhitespace) {
-		character = 30;
-	} else {
-		character = getRandomInt(30, 126);
+	switch (whitespace) {
+		case 1: {
+			character = getRandomInt(33, 126);
+			break;
+		}
+		case 2: {
+			character = 30;
+			break;
+		}
+		default: {
+			character = getRandomInt(30, 126);
+			break;
+		}
 	}
 
 	switch (character) {

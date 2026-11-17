@@ -7,7 +7,7 @@
 #include "array.h"
 #include "random.h"
 
-// I am not dealing with Windows quirks for ANSI color codes
+/* I am not dealing with Windows quirks for ANSI color codes */
 #ifdef _WIN32
 #	define isatty(x) 0
 #else
@@ -21,38 +21,34 @@
  * 2 = Random seeding error
  */
 int main(int argc, char* argv[]) {
-	// Variables
-	int STDERR_TTY = isatty(STDERR_FILENO);
+	/* Variables */
 	const char* argumentLookupTable[] = {
-		/// Printing modifiers
+		/** Printing modifiers */
 		"--no-whitespace",
 		"--only-whitespace",
-		/// Misc
+		/** Misc */
 		"--help",
 		"--version"
 	};
+	int STDERR_TTY = isatty(STDERR_FILENO);
+	int i = 0;
+	int whitespace = 0;
 
-	// Read arguments
-	for (int i = 1; i < argc; ++i) {
+	/* Read arguments */
+	for (i = 1; i < argc; ++i) {
 		int lookup = findIndexOfString(
 			argumentLookupTable,
 			sizeof(argumentLookupTable) / sizeof(argumentLookupTable[0]),
 			argv[i]
 		);
 		switch (lookup) {
-			/// Same order as in argumentLookupTable
+			/** Same order as in argumentLookupTable */
 			case 0: {
-				if (onlyWhitespace) {
-					onlyWhitespace = 0;
-				}
-				noWhitespace = 1;
+				whitespace = 1;
 				break;
 			}
 			case 1: {
-				if (noWhitespace) {
-					noWhitespace = 0;
-				}
-				onlyWhitespace = 1;
+				whitespace = 2;
 				break;
 			}
 
@@ -102,8 +98,8 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	// Check seed fail
-	if (!getRandomAsciiChar()) {
+	/* Check seed fail */
+	if (!getRandomAsciiChar(whitespace)) {
 #		ifdef _WIN32
 		fprintf(stderr, "%s: error: failed to get time\n", argv[0]);
 #		else
@@ -118,9 +114,9 @@ int main(int argc, char* argv[]) {
 		return 2;
 	}
 
-	// Actual loop
+	/* Actual loop */
 	for (;;) {
-		putchar(getRandomAsciiChar());
+		putchar(getRandomAsciiChar(whitespace));
 		fflush(stdout);
 	}
 }
